@@ -6,20 +6,26 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
    const handleLogin = async () => {
+     console.log("Login button clicked");
   try {
     const res = await API.post("/auth/login", {
       email,
       password,
     });
-
+   console.log(res.data);
     localStorage.setItem("token", res.data.token);
 
     alert("Login Successful!");
 
     navigate("/dashboard");
   } catch (error) {
-    alert(error.response?.data?.message || "Login Failed");
-  }
+  console.log("Full Error:", error);
+  console.log("Response:", error.response);
+  console.log("Data:", error.response?.data);
+  console.log("Status:", error.response?.status);
+
+  alert(error.response?.data?.message || "Login Failed");
+}
 };
   return (
     <div
